@@ -1,0 +1,143 @@
+{
+  "name": "InsightStock — Telegram alerts",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "https://YOUR_PROJECT.supabase.co/rest/v1/decision_followups?notified_at=is.null&select=*&order=created_at.asc",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        224,
+        0
+      ],
+      "id": "45557894-637d-41c5-a4ad-d23b196d9fa0",
+      "name": "Get pending alerts",
+      "onError": "stopWorkflow"
+    },
+    {
+      "parameters": {
+        "chatId": "REPLACE_WITH_YOUR_CHAT_ID",
+        "text": "={{ [\n  'insightstock — new follow-up',\n  '',\n  'product: ' + $json.product,\n  'sku: ' + $json.sku,\n  'risk: ' + $json.risk,\n  'action: ' + $json.action,\n  'note: ' + ($json.note || '—'),\n  'responsible: ' + ($json.responsible || 'not assigned')\n].join('\\n')\n  .replace(/&/g, '&amp;')\n  .replace(/</g, '&lt;')\n  .replace(/>/g, '&gt;') }}",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML"
+        },
+        "resource": "message",
+        "operation": "sendMessage"
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        416,
+        0
+      ],
+      "id": "5537e216-d8e2-4ba7-8519-70c4ef750ddf",
+      "name": "Send a text message",
+      "onError": "stopWorkflow"
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "=https://YOUR_PROJECT.supabase.co/rest/v1/decision_followups?decision_id=eq.{{ $('Get pending alerts').item.json.decision_id }}&notified_at=is.null",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Prefer",
+              "value": "return=representation"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "notified_at",
+              "value": "={{ $now.toISO() }}"
+            }
+          ]
+        },
+        "options": {},
+        "contentType": "json",
+        "specifyBody": "keypair"
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        608,
+        0
+      ],
+      "id": "020c7846-173e-4e36-9e01-146345cd7445",
+      "name": "Mark notified",
+      "onError": "stopWorkflow"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "triggerAtMinute": 5,
+              "hoursInterval": 1
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "cb648d93-238f-4a4c-85a7-0a43ba9dee82",
+      "name": "Schedule Trigger"
+    }
+  ],
+  "connections": {
+    "Get pending alerts": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a text message": {
+      "main": [
+        [
+          {
+            "node": "Mark notified",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get pending alerts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "timezone": "Asia/Seoul"
+  }
+}

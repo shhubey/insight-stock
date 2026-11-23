@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>InsightStock | Connected portfolio prototype</title><style>
+:root{--ink:#231d41;--purple:#493995;--muted:#6a657c;--line:#e3dfed;--bg:#f6f5fa;--lav:#efebfa;--orange:#99501b;--green:#1c715e}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,select,textarea{font:inherit;color:inherit}button{cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #9a85df;outline-offset:2px}header{background:#fff;border-bottom:1px solid var(--line);padding:18px max(20px,calc((100vw - 1260px)/2));display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.brand{font-size:20px;font-weight:850;letter-spacing:.12em;color:var(--purple)}.topnote,.muted{color:var(--muted)}.small{font-size:12px}.shell{max-width:1280px;margin:auto;padding:28px 24px 52px}.kicker{font-size:11px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--purple)}h1{font-size:clamp(30px,4vw,48px);letter-spacing:-.055em;line-height:1.12;margin:6px 0 10px}h2{font-size:23px;letter-spacing:-.035em;margin:0 0 8px}h3{font-size:15px;margin:0 0 8px}p{margin:7px 0 12px}.intro{max-width:820px;color:var(--muted)}.tabs,.actions,.tools{display:flex;gap:9px;flex-wrap:wrap;align-items:center}.tabs{margin:22px 0}.btn{border:1px solid var(--line);border-radius:9px;padding:9px 13px;background:white;font-weight:650}.primary,.tab[aria-selected=true]{background:var(--purple);color:white;border-color:var(--purple)}.metrics{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:20px}.metric{background:#fff;border:1px solid var(--line);border-radius:12px;text-align:left;padding:12px 14px}.metric strong{display:block;font-size:27px;line-height:1.2}.metric small{color:var(--muted)}.metric.on{box-shadow:inset 0 0 0 2px var(--purple)}.layout{display:grid;grid-template-columns:minmax(0, .8fr) minmax(0,1.4fr);gap:18px;align-items:start}.panel{background:white;border:1px solid var(--line);border-radius:16px;padding:19px;min-width:0;box-shadow:0 4px 20px #231d4105}.tools{margin:12px 0}.tools input{flex:1;min-width:100px}.field,input,select,textarea{min-width:0}input,select,textarea{border:1px solid #d9d4e6;background:white;border-radius:8px;padding:9px 10px;width:100%}.tools select{width:auto;max-width:100%}.product{width:100%;text-align:left;border:1px solid var(--line);border-radius:10px;padding:12px;background:#fff;display:flex;justify-content:space-between;gap:8px;align-items:center;margin:8px 0}.product.active{border-color:var(--purple);box-shadow:inset 0 0 0 1px var(--purple);background:#f9f7ff}.product strong{display:block;overflow-wrap:anywhere}.tag{border-radius:99px;display:inline-block;padding:4px 8px;font-size:11px;font-weight:800;white-space:nowrap;background:#eeebf3;color:#5d576f}.HIGH{background:#fff0e0;color:var(--orange)}.MEDIUM{background:#f0eafa;color:var(--purple)}.LOW{background:#e5f3ed;color:var(--green)}.head{display:flex;justify-content:space-between;align-items:start;gap:8px;flex-wrap:wrap}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:16px 0}.stat{padding:10px;background:#f8f7fb;border-radius:8px;overflow-wrap:anywhere}.stat strong{display:block;font-size:21px}.stat span{font-size:11px;color:var(--muted)}.line{border-top:1px solid var(--line);margin-top:18px;padding-top:16px}.rate{font-size:15px}.quality{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px 12px;font-size:12px;margin:8px 0 16px}.pass{color:var(--green)}.fail{color:var(--orange)}.quality div{overflow-wrap:anywhere}.result{background:var(--lav);padding:16px;border-radius:12px;margin:15px 0}.result .big{font-size:30px;font-weight:800;letter-spacing:-.04em;line-height:1.2}.result ul{padding-left:20px;margin:7px 0}.warning{background:#fff5e9;border-left:3px solid #e9954a;padding:10px 12px;border-radius:6px;margin:10px 0}.editgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}.field label{display:block;font-size:12px;font-weight:700;margin-bottom:4px}.field input{font-size:14px}.note{font-size:12px;color:var(--muted)}details{margin:10px 0}summary{cursor:pointer;font-weight:700;color:var(--purple)}.hidden{display:none!important}.logitem{padding:14px 0;border-bottom:1px solid var(--line);overflow-wrap:anywhere}.logitem:last-child{border-bottom:0}.empty{padding:20px 0;color:var(--muted)}.status{min-height:20px;color:var(--purple);font-size:13px}.queue{max-height:620px;overflow-y:auto}.quote{border-left:2px solid #c9bde8;padding-left:10px;color:var(--muted);font-size:13px;margin:7px 0}.hero-label{display:inline-block;background:#f0edf8;color:var(--purple);font-weight:650;border-radius:100px;padding:5px 10px;font-size:12px}@media(max-width:850px){.layout{grid-template-columns:1fr}.queue{max-height:280px}.metrics{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:480px){.shell{padding:18px 12px}.panel{padding:13px}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.stats,.quality{grid-template-columns:repeat(2,minmax(0,1fr))}.editgrid{grid-template-columns:1fr}.product{padding:9px}.tag{font-size:10px}.tools select{width:100%}.tools input{width:100%}}
+.queue-meta{display:block;font-size:11px;color:var(--muted);margin-top:3px}.queue-tags{display:flex;flex-direction:column;align-items:flex-end;gap:4px}.reviewed{color:var(--green);font-size:11px;font-weight:750}.queue-alert{color:var(--orange);font-weight:650}.review-note{margin-top:10px}.review-note label{display:block}.product .queue-tags{flex-shrink:0}
+.metrics{grid-template-columns:repeat(4,minmax(0,1fr))}.auth-card{max-width:480px;margin:30px auto}.auth-card label,.line label{display:block;font-size:12px;font-weight:700;margin:14px 0 5px}.actions{margin-top:14px}.connection-bar{margin:0 0 18px}.connection-bar p{margin:0}.metrics strong{font-size:27px}.session-bar{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.auth-card h2{margin-bottom:10px}@media(max-width:600px){.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style></head>
+<body><header><div class="brand">INSIGHTSTOCK</div><span id="cloudLabel" class="hero-label">Manager sign-in</span><div id="sessionBar" class="session-bar hidden"><span id="userEmail" class="small muted"></span><button id="signOut" class="btn">Sign out</button></div></header>
+<main class="shell"><section id="authPanel" class="panel auth-card"><div class="kicker">Return-risk decision support</div><h2>Manager sign-in</h2><p class="muted">Review synthetic product data and save your decisions.</p>
+<form id="loginForm"><label for="email">Email</label><input id="email" type="email" autocomplete="username" required><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" required><div class="actions"><button id="loginButton" class="btn primary" type="submit">Sign in</button><button id="retryLoad" class="btn" type="button">Retry connection</button></div></form><p id="authMessage" class="status" role="status" aria-live="polite"></p></section>
+<section id="appContent" class="hidden"><div class="kicker">Inventory intelligence / Return signals</div><h1>Return review overview</h1><p class="intro">Review product evidence, choose what to investigate, and keep a record of your decisions.</p>
+<div id="cloudBar" class="panel connection-bar hidden"><div class="head"><p id="cloudMessage" class="status" role="status" aria-live="polite"></p><button id="reload" class="btn">Reload saved data</button></div></div>
+<div class="tabs"><button id="tabQueue" class="btn tab" aria-selected="true">Product queue</button><button id="tabLog" class="btn tab" aria-selected="false">Decision log <span id="logCount">(0)</span></button></div>
+<section id="workspace"><div id="metrics" class="metrics"></div><div class="layout"><aside class="panel"><div class="head"><h2>Product queue</h2><span id="queueCount" class="small muted"></span></div><div class="tools"><input id="search" aria-label="Search products" placeholder="Search name, SKU or snapshot"><select id="filter" aria-label="Filter products"><option value="ALL">All products</option><option>HIGH</option><option>MEDIUM</option><option>LOW</option><option>NOT SCORED</option><option>REVIEWED</option><option>TO REVIEW</option></select></div><p class="small muted">Priority: rule category, historical returns, then stock exposure.</p><div id="queue" class="queue"></div></aside><section id="detail" class="panel" aria-label="Product evidence and decision"></section></div></section>
+<section id="logSection" class="panel hidden"><div class="head"><h2>Saved manager decisions</h2><button id="export" class="btn" disabled>Export CSV</button></div><p class="small muted">Decisions retain the evidence available when they were saved. No inventory is changed.</p><div id="logItems"></div></section></section>
+<p class="small muted" style="margin-top:24px">Academic team project extended as a portfolio prototype · Synthetic data · Illustrative rules</p></main><script>'use strict';
+
+// A publishable key identifies this application; access is enforced by Auth and RLS.
+const CONFIG = Object.freeze({
+  url: 'https://YOUR_PROJECT_REF.supabase.co',
+  key: 'YOUR_PUBLISHABLE_KEY'
+});
+const ACTIONS = ['Investigate product issue', 'Review evidence / monitor', 'Monitor only', 'Request data / fix records', 'No action yet'];
+const RESPONSIBILITIES = ['', 'Inventory manager', 'E-commerce manager', 'Customer service team', 'Quality / supplier team'];
+const SESSION_KEY = 'insightstock-YOUR_PROJECT_REF-session-v1';
+const $ = id => document.getElementById(id);
+const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[c]));
+const state = {tasks: null, advancing: false, session: null, rows: [], decisions: [], selected: null, filter: 'ALL', saving: false, loading: false, epoch: 0};
+let refreshPromise = null;
+
+function message(id, text, error = false) {
+  $(id).textContent = text;
+  $(id).classList.toggle('fail', error);
+}
+function rememberSession(session) {
+  state.session = session ? {...session, expires_at: session.expires_at || Math.floor(Date.now()/1000) + (session.expires_in || 3600)} : null;
+  try {
+    if (state.session) sessionStorage.setItem(SESSION_KEY, JSON.stringify(state.session));
+    else sessionStorage.removeItem(SESSION_KEY);
+  } catch (_) { /* Login still works when tab storage is unavailable. */ }
+}
+async function http(path, options = {}, token = null) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 18000);
+  try {
+    const response = await fetch(CONFIG.url + path, {
+      method: options.method || 'GET',
+      headers: {apikey: CONFIG.key, ...(token ? {Authorization: 'Bearer ' + token} : {}),
+        ...(options.body ? {'Content-Type':'application/json'} : {}), ...(options.headers || {})},
+      ...(options.body ? {body: JSON.stringify(options.body)} : {}),
+      credentials: 'omit', cache: 'no-store', signal: controller.signal
+    });
+    const text = await response.text();
+    let body = null;
+    if (text) { try { body = JSON.parse(text); } catch (_) { body = null; } }
+    if (!response.ok) {
+      const error = new Error(body?.message || body?.msg || body?.error_description || body?.error || ('Request failed (' + response.status + ').'));
+      error.status = response.status;
+      error.code = body?.code;
+      throw error;
+    }
+    return body;
+  } catch (error) {
+    if (error.name === 'AbortError') throw new Error('The request timed out. Check your connection and try again.');
+    throw error;
+  } finally { clearTimeout(timer); }
+}
+async function refreshSession() {
+  if (refreshPromise) return refreshPromise;
+  const epoch = state.epoch;
+  const token = state.session?.refresh_token;
+  if (!token) throw new Error('Please sign in again.');
+  refreshPromise = (async () => {
+    try {
+      const session = await http('/auth/v1/token?grant_type=refresh_token', {method: 'POST', body: {refresh_token: token}});
+      if (epoch !== state.epoch) throw new Error('The sign-in session changed. Please try again.');
+      rememberSession(session);
+      return session;
+    } catch (error) {
+      if (epoch === state.epoch && (error.status === 400 || error.status === 401)) {
+        clearLocalSession();
+        message('authMessage', 'Your session expired. Please sign in again.', true);
+      }
+      throw error;
+    } finally { refreshPromise = null; }
+  })();
+  return refreshPromise;
+}
+async function api(path, options = {}) {
+  const epoch = state.epoch;
+  if (!state.session) throw new Error('Please sign in first.');
+  if (state.session.expires_at <= Math.floor(Date.now()/1000) + 45) await refreshSession();
+  if (epoch !== state.epoch) throw new Error('Your session changed. Please sign in again.');
+  try { return await http('/rest/v1/' + path, options, state.session.access_token); }
+  catch (error) {
+    if (error.status !== 401 || epoch !== state.epoch) throw error;
+    await refreshSession();
+    if (epoch !== state.epoch) throw error;
+    return http('/rest/v1/' + path, options, state.session.access_token);
+  }
+}
+async function readAll(path) {
+  const result = [];
+  for (let offset = 0; offset < 50000; offset += 500) {
+    const batch = await api(path + '&limit=500&offset=' + offset);
+    if (!Array.isArray(batch)) throw new Error('Unexpected data response. Please reload.');
+    result.push(...batch);
+    if (batch.length < 500) return result;
+  }
+  throw new Error('The demo data limit was reached. Ask the project owner to narrow the snapshot query.');
+}
+function renderExcerpt(row, text, slot) {
+  if (!text) return '';
+  const quote = '<div class="quote">“' + esc(text) + '”</div>';
+  if (!state.analyses) return quote + '<p class="small muted">AI analysis unavailable. Reload saved data to retry.</p>';
+  const reviewId = row.record_id + '-EX' + slot;
+  const analysis = state.analyses.find(item => item.snapshot_id === row.id && item.review_id === reviewId && item.review_text === text);
+  if (!analysis) return quote + '<p class="small muted">No saved AI analysis for this excerpt.</p>';
+  const reviewStatus = analysis.needs_human_review ? 'Awaiting human review' : 'Reviewed';
+  return quote + '<p class="small">AI analysis · <strong>' + esc(analysis.category) +
+    '</strong> · ' + reviewStatus + '</p>';
+}
+function currentRow() { return state.rows.find(row => row.id === state.selected); }
+function latestDecision(row) { return state.decisions.find(d => d.snapshot_id === row.id); }
+function savedDecision(row) {
+  return state.decisions.find(d => d.snapshot_id === row.id && d.input_fingerprint === row.input_fingerprint && d.rule_version === row.rule_version);
+}
+function suggested(row) {
+  return ({HIGH:'Investigate product issue', MEDIUM:'Review evidence / monitor', LOW:'Monitor only'})[row.risk_category] || 'Request data / fix records';
+}
+function statusText(status) {
+  return ({READY:'Ready for rule-based review', SMALL_SAMPLE:'Fewer than 20 eligible sales', MISSING_RETURNS:'Return count is missing', SKU_MISMATCH:'Sales and return SKUs do not match', MISSING_RECORD_ID:'Record ID is missing', MISSING_SKU:'A required SKU is missing', DUPLICATE_SNAPSHOT:'Duplicate SKU or record ID within this snapshot', MISSING_SALES:'Sales count is missing', INVALID_SALES:'Sales count must be positive', INVALID_RETURN_COUNT:'Returns must be between zero and sold units', MISSING_DATES_OR_WINDOW:'Dates or the return window are missing', INVALID_DATES:'Dates are invalid', UNSUPPORTED_RETURN_WINDOW:'This demo requires a 30-day return window', INVALID_COHORT_PERIOD:'Sales period must include 90 days', RETURN_WINDOW_OPEN:'The return window has not finished', INVALID_REVIEW_DATA:'Review counts or dates need checking', INVALID_STOCK:'Stock must be a non-negative whole number'})[status] || status;
+}
+function formatPct(value) { return value === null || value === undefined ? 'Unavailable' : Number(value).toFixed(1) + '%'; }
+function badge(value) { return '<span class="tag ' + esc(value) + '">' + esc(value) + '</span>'; }
+function visibleRows() {
+  const query = $('search').value.trim().toLowerCase();
+  const ranks = {HIGH:0, MEDIUM:1, 'NOT SCORED':2, LOW:3};
+  return state.rows.filter(row => (!query || [row.product,row.variant,row.sku,row.snapshot_date].join(' ').toLowerCase().includes(query)) &&
+    (state.filter === 'ALL' || (state.filter === 'REVIEWED' ? !!savedDecision(row) : state.filter === 'TO REVIEW' ? !savedDecision(row) : row.risk_category === state.filter)))
+    .sort((a,b) => ranks[a.risk_category]-ranks[b.risk_category] ||
+      (b.historical_return_rate_pct ?? -1)-(a.historical_return_rate_pct ?? -1) || (b.stock_on_hand ?? -1)-(a.stock_on_hand ?? -1) || a.id-b.id);
+}
+function renderQueue() {
+  const rows = visibleRows();
+  $('queueCount').textContent = rows.length + ' of ' + state.rows.length + ' · ' + state.rows.filter(savedDecision).length + ' reviewed';
+  $('queue').innerHTML = rows.length ? rows.map(row => '<button class="product ' + (state.selected===row.id?'active':'') + '" data-row="' + esc(row.id) + '" aria-pressed="' + (state.selected===row.id) + '"><span><strong>' + esc(row.product) + ' · ' + esc(row.variant) + '</strong><span class="small muted">' + esc(row.sku) + ' · ' + esc(row.snapshot_date) + '</span><span class="queue-meta">' + (row.historical_return_rate_pct===null?'Return rate unavailable':formatPct(row.historical_return_rate_pct)+' historical returns') + '</span>' + (row.complaint_warning && row.risk_category==='NOT SCORED'?'<span class="queue-meta queue-alert">Complaints need review</span>':'') + '</span><span class="queue-tags">' + badge(row.risk_category) + (savedDecision(row)?'<span class="reviewed">✓ Reviewed</span>':latestDecision(row)?'<span class="small queue-alert">Re-review needed</span>':'') + '</span></button>').join('') : '<p class="empty">No matching products.</p>';
+  $('queue').querySelectorAll('[data-row]').forEach(button => button.onclick = () => {state.selected=Number(button.dataset.row); renderQueue(); renderDetail();});
+  $('metrics').innerHTML = ['HIGH','MEDIUM','LOW','NOT SCORED'].map(risk => '<div class="metric"><strong>' + state.rows.filter(row=>row.risk_category===risk).length + '</strong><small>' + esc(risk) + '</small></div>').join('');
+}
+function renderDetail() {
+  const row = currentRow();
+  if (!row) { $('detail').innerHTML='<p class="empty">Select a product to review.</p>'; return; }
+  const saved = savedDecision(row);
+  $('detail').innerHTML = '<div class="head"><div><div class="kicker">Product evidence</div><h2>' + esc(row.product) + ' · ' + esc(row.variant) + '</h2><span class="small muted">' + esc(row.record_id) + ' · Snapshot ' + esc(row.snapshot_date) + '</span></div>' + badge(row.risk_category) + '</div>' +
+    '<div class="stats">' + [[row.sold_eligible_90d,'Eligible sold units'],[row.returned_in_30d_window,'Returned units'],[row.negative_review_mentions,'Complaint mentions'],[row.stock_on_hand,'Units in stock']].map(([v,label])=>'<div class="stat"><strong>'+esc(v??'—')+'</strong><span>'+esc(label)+'</span></div>').join('') + '</div>' +
+    '<p><strong>Historical return rate: ' + formatPct(row.historical_return_rate_pct) + '</strong></p><p class="small muted">Sales period ' + esc(row.cohort_start_date) + ' – ' + esc(row.cohort_end_date) + ' · ' + esc(row.return_window_days) + '-day return window</p>' +
+    '<p class="' + (row.review_status==='READY'?'pass':'fail') + '">' + esc(statusText(row.review_status)) + '</p>' +
+    (row.review_status==='SMALL_SAMPLE'?'<p class="small muted">The historical rate can be shown, but this sample is too small for the demo assessment.</p>':'') +
+    (row.complaint_warning?'<div class="warning"><strong>Complaints need attention.</strong> ' + esc(row.negative_review_mentions) + ' of ' + esc(row.total_reviews) + ' reviews mention complaints (' + formatPct(row.complaint_share_pct) + '). Review this evidence even when a score is unavailable.</div>':'') +
+    '<details><summary>Customer feedback and source</summary><p class="small">Complaint theme: ' + esc(row.main_reason) + '. This is a hypothesis to investigate.</p><p class="small muted">' + esc(row.total_reviews??'—') + ' reviews · ' + esc(row.review_start_date) + ' – ' + esc(row.review_end_date) + '</p>' +
+    [row.review_excerpt_1,row.review_excerpt_2].map((text,index) => renderExcerpt(row,text,index+1)).join('') + '<p class="small muted">Source: ' + esc(row.source) + '</p></details>' +
+    '<div class="result"><div class="kicker">Rule-based return signal</div><p class="big">' + esc(row.risk_category) + '</p><p class="small">' + esc(row.risk_category==='NOT SCORED'?'Assessment withheld: '+statusText(row.review_status):'Suggested next step: '+suggested(row)) + '</p><p class="small muted">Illustrative rules using synthetic data. These categories are not validated predictions. Stock shows operational exposure.</p></div>' +
+    '<form id="decisionForm" class="line"><h3>Manager decision</h3><p class="small muted">Suggested action: ' + esc(suggested(row)) + '</p>' +
+    '<label for="action">Choose action</label><select id="action" required ' + (saved?'disabled':'') + '><option value="">Choose a next step…</option>' + ACTIONS.map(action=>'<option>'+esc(action)+'</option>').join('') + '</select>' +
+    '<label id="noteLabel" for="note">Decision note (optional)</label><textarea id="note" maxlength="500" rows="3" ' + (saved?'disabled':'') + '></textarea>' +
+    '<label for="responsible">Follow-up responsibility</label><select id="responsible" ' + (saved?'disabled':'') + '>' + RESPONSIBILITIES.map(role=>'<option value="'+esc(role)+'">'+esc(role||'Not assigned')+'</option>').join('') + '</select>' +
+    '<div class="actions"><button id="saveDecision" class="btn primary" type="submit" disabled>' + (saved?'Decision saved':'Save manager decision') + '</button></div><p id="saveMessage" class="status" role="status" aria-live="polite"></p></form>';
+  if (saved) {
+    $('action').value=saved.action; $('note').value=saved.note; $('responsible').value=saved.responsible;
+    message('saveMessage','Saved in Supabase on '+new Date(saved.created_at).toLocaleString()+'.');
+  }
+  function update() {
+    const override = !!$('action').value && $('action').value !== suggested(row);
+    $('note').required = override;
+    $('noteLabel').textContent=override?'Reason for override (required)':'Decision note (optional)';
+    $('saveDecision').disabled=!!saved || state.saving || !$('action').value || (override && !$('note').value.trim());
+  }
+  $('action').onchange=update; $('note').oninput=update;
+  $('decisionForm').onsubmit=event=>{event.preventDefault(); saveDecision(row);};
+  update();
+}
+function taskControls(id) {
+  if (!state.tasks) return '<p class="small muted">Task status unavailable. Reload saved data to retry.</p>';
+  const task = state.tasks.find(item => item.decision_id === id);
+  if (!task) return '<p class="small muted">Waiting for follow-up task</p>';
+  const label = {NEW:'Start task', IN_PROGRESS:'Mark done'}[task.status];
+  const action = label ? '<button type="button" class="btn" data-task="'+esc(id)+'" data-status="'+esc(task.status)+'"'+(state.advancing?' disabled':'')+'>'+label+'</button>' : '';
+  return '<div class="head"><p class="small">Task status · <strong>'+esc(task.status)+'</strong></p>'+action+'</div>';
+}
+async function advanceTask(id, current) {
+  if (state.loading || state.advancing || !state.session) return;
+  const epoch = state.epoch;
+  const task = state.tasks?.find(item => item.decision_id === id);
+  const expected = {NEW:'IN_PROGRESS', IN_PROGRESS:'DONE'}[current];
+  if (!expected || !task || task.status !== current) return;
+  state.advancing=true;
+  renderLog();
+  try {
+    const status = await api('rpc/advance_followup_status', {
+      method:'POST', body:{p_decision_id:id, p_current_status:current}
+    });
+    if (epoch !== state.epoch) return;
+    if (status !== expected) throw new Error('Unexpected status returned.');
+    task.status=status;
+    message('cloudMessage','Task status saved: '+status+'.');
+  } catch (error) {
+    if (epoch !== state.epoch) return;
+    state.tasks=null;
+    message('cloudMessage',error.message+' Use Reload saved data to check the current task status.',true);
+  } finally {
+    if (epoch === state.epoch) { state.advancing=false; renderLog(); }
+  }
+}
+function renderLog() {
+  $('logCount').textContent='('+state.decisions.length+')';
+  $('export').disabled=!state.decisions.length;
+  $('logItems').innerHTML=state.decisions.length?state.decisions.map(d=>{
+    const r=d.input_snapshot, a=d.assessment;
+    return '<div class="logitem"><div class="head"><strong>'+esc(r.product)+' · '+esc(r.variant)+'</strong>'+badge(a.risk_category)+'</div><p>'+esc(d.action)+(d.note?' — '+esc(d.note):'')+'</p><p class="small muted">'+esc(r.sku)+' · '+esc(new Date(d.created_at).toLocaleString())+(d.responsible?' · '+esc(d.responsible):'')+'</p>'+taskControls(d.id)+'<details><summary>Evidence at the time of decision</summary><p class="small">Snapshot: '+esc(r.snapshot_date)+' · Historical returns: '+formatPct(a.historical_return_rate_pct)+' · '+esc(statusText(a.review_status))+'</p><p class="small">'+esc(r.returned_in_30d_window??'Unknown')+' returned / '+esc(r.sold_eligible_90d)+' eligible sold units · '+esc(d.rule_version)+'</p></details></div>';
+  }).join(''):'<p class="empty">No saved decisions yet.</p>';
+}
+async function saveDecision(row) {
+  if (state.saving || state.loading || savedDecision(row)) return;
+  const action=$('action').value, note=$('note').value.trim(), responsible=$('responsible').value;
+  if (!ACTIONS.includes(action) || !RESPONSIBILITIES.includes(responsible)) return;
+  if (action!==suggested(row) && !note) {message('saveMessage','Enter a reason for the override.',true);return;}
+  const epoch=state.epoch;
+  state.saving=true; $('saveDecision').disabled=true;
+  message('saveMessage','Saving to Supabase…');
+  try {
+    let result=await api('manager_decisions?on_conflict=owner_id,snapshot_id,input_fingerprint,rule_version', {
+      method:'POST', headers:{Prefer:'resolution=ignore-duplicates,return=representation'},
+      body:{snapshot_id:row.id,input_fingerprint:row.input_fingerprint,rule_version:row.rule_version,action,note,responsible}
+    });
+    if (!Array.isArray(result)) throw new Error('The save response could not be verified. Reload before trying again.');
+    if (!result.length) result=await api('manager_decisions?select=*&snapshot_id=eq.'+row.id+'&input_fingerprint=eq.'+encodeURIComponent(row.input_fingerprint)+'&rule_version=eq.'+encodeURIComponent(row.rule_version));
+    if (!result?.length) throw new Error('Could not confirm the saved decision. Reload before retrying.');
+    if (epoch!==state.epoch) return;
+    state.decisions=Array.from(new Map([...result,...state.decisions].map(d=>[d.id,d])).values()).sort((a,b)=>b.created_at.localeCompare(a.created_at));
+    renderQueue(); renderLog();
+    if (state.selected===row.id) renderDetail();
+    message('cloudMessage','Decision saved in Supabase. It will be available after refreshing.');
+  } catch(error) {
+    if (epoch===state.epoch) {
+      if (state.selected===row.id) message('saveMessage',error.message+' Your choices remain on screen; retrying will not create a duplicate.',true);
+      else message('cloudMessage',error.message,true);
+    }
+  } finally {
+    if (epoch===state.epoch) state.saving=false;
+    if (epoch===state.epoch && state.selected===row.id && $('saveDecision') && !savedDecision(row)) {
+      $('action').onchange();
+    }
+  }
+}
+function setTab(tab) {
+  $('workspace').classList.toggle('hidden',tab!=='queue');
+  $('logSection').classList.toggle('hidden',tab!=='log');
+  $('tabQueue').setAttribute('aria-selected',String(tab==='queue'));
+  $('tabLog').setAttribute('aria-selected',String(tab==='log'));
+}
+async function loadCloud() {
+  if (state.loading || state.saving || state.advancing) return;
+  const epoch=state.epoch;
+  state.loading=true; $('reload').disabled=true; $('retryLoad').disabled=true;
+  message('cloudMessage','Loading saved data…'); message('authMessage','Checking access…');
+  try {
+    const members=await api('app_members?select=user_id&user_id=eq.'+encodeURIComponent(state.session.user.id));
+    if (!Array.isArray(members) || !members.length) {
+      const denied=new Error('This account has not been enabled by the project owner. Complete the account setup first.');denied.status=403;throw denied;
+    }
+    const [rows,decisions,analyses,tasks]=await Promise.all([
+      readAll('manager_review_queue?select=*&order=record_id.asc,id.asc'),
+      readAll('manager_decisions?select=*&order=created_at.desc,id.desc'),
+      readAll('rpc/manager_excerpt_analysis?select=*&order=snapshot_id.asc,review_id.asc').catch(() => null),
+      readAll('rpc/manager_followup_statuses?select=*&order=decision_id.asc').catch(() => null)
+    ]);
+    if (epoch!==state.epoch) return;
+    if (!rows.length) throw new Error('No product snapshots are available. Check the CSV import and account access.');
+    if (rows.some(row=>!row.input_fingerprint || !row.rule_version)) throw new Error('Database setup is incomplete. Run 01_connect_supabase.sql first.');
+    state.tasks=tasks; state.analyses=analyses; state.rows=rows; state.decisions=decisions;
+    if (!rows.some(row=>row.id===state.selected)) state.selected=visibleRows()[0]?.id ?? rows[0].id;
+    $('authPanel').classList.add('hidden'); $('appContent').classList.remove('hidden');
+    $('cloudBar').classList.remove('hidden'); $('sessionBar').classList.remove('hidden');
+    $('userEmail').textContent=state.session.user.email || 'Manager';
+    $('cloudLabel').textContent='Connected · Synthetic data';
+    renderQueue(); renderDetail(); renderLog();
+    message('cloudMessage','Loaded '+rows.length+' product snapshots and '+decisions.length+' saved decisions.');
+  } catch(error) {
+    if (epoch===state.epoch) {
+      const text=(error.code==='PGRST205'||error.code==='42P01')?'Database setup is incomplete. Run 01_connect_supabase.sql, then retry.':error.message;
+      if(error.status===403 || error.code==='42501') clearLocalSession();
+      message('authMessage',text,true); message('cloudMessage',text,true);
+      if (!state.rows.length) {$('authPanel').classList.remove('hidden');$('appContent').classList.add('hidden');}
+    }
+  } finally {
+    if(epoch===state.epoch){state.loading=false; $('reload').disabled=false; $('retryLoad').disabled=false;}
+  }
+}
+function clearLocalSession() {
+  state.epoch++; rememberSession(null); state.advancing=false; state.tasks=null; state.analyses=null; state.rows=[]; state.decisions=[]; state.selected=null;state.loading=false;state.saving=false;
+  $('reload').disabled=false;$('retryLoad').disabled=false;
+  $('authPanel').classList.remove('hidden'); $('appContent').classList.add('hidden');
+  $('cloudBar').classList.add('hidden'); $('sessionBar').classList.add('hidden');
+  $('cloudLabel').textContent='Manager sign-in';
+  $('queue').innerHTML=''; $('detail').innerHTML=''; $('logItems').innerHTML=''; $('metrics').innerHTML='';
+  $('password').value='';
+}
+async function signOut() {
+  const token=state.session?.access_token;
+  clearLocalSession();
+  message('authMessage','Signed out on this device.');
+  if (token) try {await http('/auth/v1/logout?scope=local',{method:'POST'},token);}
+  catch (_) {message('authMessage','Signed out on this device. The server could not confirm session revocation.',true);}
+}
+function csvCell(value) {
+  let s=String(value??''); if (/^[\s]*[=+@-]/.test(s)) s="'"+s;
+  return '"'+s.replace(/"/g,'""')+'"';
+}
+function exportLog() {
+  const keys=['id','snapshot_id','created_at','action','note','responsible','rule_version','input_fingerprint','input_snapshot','assessment'];
+  const csv=[keys.join(','),...state.decisions.map(d=>keys.map(k=>csvCell(typeof d[k]==='object'?JSON.stringify(d[k]):d[k])).join(','))].join('\r\n');
+  const url=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}));
+  const link=document.createElement('a'); link.href=url; link.download='InsightStock_Saved_Decisions.csv';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function init() {
+  $('loginForm').onsubmit=async event=>{
+    event.preventDefault(); if (state.loading) return;
+    const email=$('email').value.trim(), password=$('password').value;
+    $('loginButton').disabled=true; message('authMessage','Signing in…');
+    const epoch=++state.epoch;
+    try {
+      const session=await http('/auth/v1/token?grant_type=password',{method:'POST',body:{email,password}});
+      if (epoch!==state.epoch) return;
+      rememberSession(session); $('password').value=''; $('sessionBar').classList.remove('hidden');
+      $('userEmail').textContent=session.user.email || 'Manager';
+      await loadCloud();
+    } catch(error) {if(epoch===state.epoch) message('authMessage',error.message,true);}
+    finally {$('loginButton').disabled=false;}
+  };
+  $('logItems').onclick=event=>{
+    const button=event.target.closest('button[data-task]');
+    if (button) advanceTask(button.dataset.task,button.dataset.status);
+  };
+  $('search').oninput=renderQueue;
+  $('filter').onchange=()=>{state.filter=$('filter').value;renderQueue();};
+  $('reload').onclick=loadCloud; $('retryLoad').onclick=()=>state.session?loadCloud():message('authMessage','Sign in with your manager account first.',true);
+  $('signOut').onclick=signOut; $('tabQueue').onclick=()=>setTab('queue');$('tabLog').onclick=()=>setTab('log');$('export').onclick=exportLog;
+  try {const s=JSON.parse(sessionStorage.getItem(SESSION_KEY));if(s?.access_token&&s?.refresh_token&&s?.user?.id) rememberSession(s);}catch(_){}
+  if(state.session){$('sessionBar').classList.remove('hidden');$('userEmail').textContent=state.session.user.email||'Manager';loadCloud();}
+}
+init();
+</script></body></html>
