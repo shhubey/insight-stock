@@ -4,8 +4,7 @@ InsightStock is a retail returns dashboard that brings together sales,
 returns, stock levels, and customer feedback. Managers can review product
 evidence, record a decision, and assign a follow-up through Telegram.
 
-[Watch the 1-minute demo](./([https://youtu.be/GpMt8IGfFHM](https://youtu.be/GpMt8IGfFHM)))
-
+[▶ Watch the 1-minute demo on YouTube](https://youtu.be/GpMt8IGfFHM)
 ## Demo scenario
 
 Nova Bag has a 2.5% historical return rate. A customer reports that the
